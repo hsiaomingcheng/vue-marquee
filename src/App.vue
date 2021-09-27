@@ -1,16 +1,50 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <swiper
+    :slides-per-view="1"
+    @swiper="onSwiper"
+    @slideChange="onSlideChange"
+  >
+    <swiper-slide class="box red">Slide 1</swiper-slide>
+    <swiper-slide class="box blue">Slide 2</swiper-slide>
+    <swiper-slide class="box pink">Slide 3</swiper-slide>
+  </swiper>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import { reactive } from 'vue';
+
+import { Autoplay } from 'swiper';
+
+// Import Swiper Vue.js components
+import { Swiper, SwiperSlide } from 'swiper/vue';
+
+// Import Swiper styles
+import "swiper/swiper.min.css";
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
+    Swiper,
+    SwiperSlide
+  },
+  setup() {
+    const swiper_options = reactive({
+      
+    })
+
+    const onSwiper = (swiper) => {
+      console.log(swiper);
+    };
+    const onSlideChange = () => {
+      console.log('slide change');
+    };
+
+    return {
+      onSwiper,
+      onSlideChange,
+    };
+  },
 }
 </script>
 
@@ -20,7 +54,23 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #fff;
   margin-top: 60px;
+}
+
+.box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+}
+.red {
+  background: red;
+}
+.blue {
+  background: blue;
+}
+.pink {
+  background: pink;
 }
 </style>
